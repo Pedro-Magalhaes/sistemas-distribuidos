@@ -27,7 +27,7 @@ server.lua :
 * Imprime na tela a porta e o ip dos servidores
 * Obs: Estou ignorando o ip exibido pelo server e no cliente defino diretamente o 127.0.0.1
 
-client.lua : 
+client.lua :
 
 * Cria os proxys 2 proxies usando o createProxy
 * faz as chamadas ao server via socket
