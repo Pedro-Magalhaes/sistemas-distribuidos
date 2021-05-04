@@ -2,8 +2,8 @@ struct = {
     name = "messageStruct",
     fields = {
       {name = "term", type = "int"},
-      {name = "fromNode", type = "int"},
-      {name = "toNode", type = "int"},
+      {name = "from", type = "int"},
+      {name = "to", type = "int"},
       {name = "type", type = "string"},
       {name = "value", type = "string"}
     }
@@ -26,7 +26,7 @@ struct = {
      stopNode ={
       resulttype = "void",
       args = {
-        {direction= "in", type="int"} -- tempo de pausa ( 0 para nao voltar?)
+        {direction= "in", type="int"} -- tempo de pausa ( 0 para nao voltar?) tenho que rever o comportamento
       }
      },
      appendEntry ={  --heartBeat
