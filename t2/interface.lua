@@ -10,7 +10,7 @@ struct = {
   }
 
   interface = {
-   name = "minhaInt",
+   name = "Raft",
    methods = {
      receiveMessage = {
        resulttype = "string",

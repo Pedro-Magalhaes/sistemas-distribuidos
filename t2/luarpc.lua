@@ -38,13 +38,12 @@ function luarpc.createServant(obj, interface_path, port)
   end -- default é "0"
 
   local server = socket.try(socket.bind("*", port))
-  print("Server is running on port: " .. port)
   table.insert(sockets_lst, server) -- insert at sockets_lst
   servants_lst[server] = {}
   servants_lst[server]["obj"] = obj
   servants_lst[server]["interface"] = interface_path
   local sIp, sPort = server:getsockname()
-  return {sIp,sPort}
+  return {ip = sIp, port = sPort}
 end
 
 function luarpc.createProxy(host, port, interface_path, verbose)
@@ -308,6 +307,11 @@ function luarpc.print_tables(obj)
     print(obj)
   end
   print("\n")
+end
+
+-- encapsula o socket gettime
+function luarpc.gettime()
+  return socket.gettime()
 end
 
 -------------------------------------------------------------------------------- Return RPC
