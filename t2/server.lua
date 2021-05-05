@@ -8,10 +8,10 @@ local states = {
     LEADER = 3
 }
 local msgs = {
-    OK = 1,
-    NO = 2,
-    VOTE = 3,
-    HEARTBEAT = 4
+    OK = "ok",
+    NO = "no",
+    VOTE = "vote",
+    HEARTBEAT = "beat"
 }
 local IP = "127.0.0.1"
 
@@ -87,7 +87,7 @@ local function buildRaftObj()
             if port ~= me.id then
                 print("ALLLOOOOOO")
                 local s = luarpc.createProxy(IP, port, arq_interface)
-                local resp = s.receiveMessage({term = me.term, from = me.id, to = port, type = msgs.HEARTBEAT})
+                local resp = s.receiveMessage({term = me.term, from = me.id, to = port, type = msgs.HEARTBEAT, value = "blabla"})
                 realPrint(resp)
                 print(resp)
             end
@@ -184,6 +184,7 @@ local function buildRaftObj()
 
     me.snapshot = function()
         printMe()
+        return "2"
     end
 
     return me
@@ -197,8 +198,9 @@ for i = 1, peersCount, 1 do
     local raftImplemtation = buildRaftObj()
     local serv, err = luarpc.createServant(raftImplemtation, arq_interface)
     if err == nil and serv ~= nil then
-        peers[serv.port] = serv
-        raftImplemtation.id = serv.port
+        local p = tonumber(serv.port)
+        peers[p] = serv
+        raftImplemtation.id = p
         raftImplemtation.peers = peers
         raftImplemtation.numberOfPeers = peersCount
     else

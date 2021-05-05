@@ -37,6 +37,7 @@ function luarpc.createServant(obj, interface_path, port)
       port = 0
   end -- default é "0"
 
+
   local server = socket.try(socket.bind("*", port))
   table.insert(sockets_lst, server) -- insert at sockets_lst
   servants_lst[server] = {}
@@ -54,7 +55,7 @@ function luarpc.createProxy(host, port, interface_path, verbose)
       local params = {...}
 
       -- assert parameters doesn't have errors
-      local isValid, params, reasons = validator.validate_client(params,fname,fmethod.args)
+      local isValid, params, reasons = validator.validate_client(params,fname,fmethod.args,struct)
       if not isValid and #reasons > 0 then
         return "[ERROR]: Invalid request. Reason: \n" .. reasons
       end
@@ -104,6 +105,7 @@ function luarpc.createProxy(host, port, interface_path, verbose)
       proxy_stub.conn:close() -- fecha conexao
 
       local res = marshall.unmarshalling(returns, interface_path) -- converte string para table com results
+
       return table.unpack(res) -- retorna results
     end --end of function
   end -- end of for
@@ -245,7 +247,9 @@ function luarpc.process_request(client, request_msg, servant)
   end
 
   -- invoke the method passed in the request with all its parameters and get the result
-  local result = table.pack(servants_lst[servant]["obj"][func_name](table.unpack(params)))
+  local implFunc = servants_lst[servant]["obj"][func_name]
+  local result = table.pack(pcall(implFunc, table.unpack(params)))
+  -- print(result)
   local msg_to_send = marshall.marshalling(result)
   -- print("\n\n\t\t >>>>>> [SVR -> CLT] MSG TO BE SENT FROM SERVER:",msg_to_send) -- [DEBUG]
   return msg_to_send
