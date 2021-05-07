@@ -3,14 +3,15 @@ local luarpc = require("luarpc")
 -- Globals
 local arq_interface = "interface.lua"
 local states = {
-    FOLLOWER = 1,
-    CANDIDATE = 2,
-    LEADER = 3
+    FOLLOWER = "follower",
+    CANDIDATE = "candidate",
+    LEADER = "leader"
 }
 local msgs = {
     OK = "ok",
     NO = "no",
     VOTE = "vote",
+    VOTEREQUEST = "voterequest",
     HEARTBEAT = "beat"
 }
 local IP = "127.0.0.1"
@@ -37,9 +38,7 @@ end
 
 local function buildRaftObj()
     local me = {}
-    me.electionTimeout = getRandomTimeout() + 2 -- FIXME: random????
-    me.leaderTimeout = getRandomTimeout() -- FIXME: Check good number
-    me.timeout = getRandomTimeout() -- FIXME: Refactor for a table with all timeouts
+    me.timeout = { [states.CANDIDATE] = nil, [states.FOLLOWER] = nil , [states.LEADER] = nil}
     me.state = states.FOLLOWER
     me.currTime = 0 -- contabiliza a passagem de tempo desde o ultimo heartbeat ou troca de estado
     me.leader = nil
@@ -51,8 +50,11 @@ local function buildRaftObj()
     me.failureTime = 0
     me.myTerm = 0
     me.term = 0
+    me.votedFor = nil
+    me.votes = 0
 
-    local realPrint = print
+    -- changing glogal print so it prints the peer's id
+    local realPrint = print 
     local print = function(s)
         if me ~= nil and me.id ~= nil then
           realPrint(me.id .. ": " .. s)
@@ -62,7 +64,7 @@ local function buildRaftObj()
     end
 
     local function printMe()
-        local myString = "\n Timeout: " .. me.timeout .. " State: " .. me.state .. " My term: " .. me.myTerm
+        local myString = "\n Timeout: " .. me.timeout[me.state] .. " State: " .. me.state .. " My term: " .. me.myTerm
         if me.numberOfPeers > 0 then
             myString = myString .. "\n Peers:"
             for k, _ in pairs(me.peers) do
@@ -78,68 +80,122 @@ local function buildRaftObj()
         print(myString)
     end
 
-    local function callElection()
-        print("callElection not yet implemented") -- FIXME
+    local function heartbeat()
+      for port, peer in pairs(me.peers) do
+        if port ~= me.id then
+          print("heartbeating: " .. port)
+          local s = luarpc.createProxy(IP, port, arq_interface)
+          s.appendEntry(me.term) -- FIXME: What to send here? 
+        end
+      end
     end
 
-    local function heartbeat()
-        for port, peer in pairs(me.peers) do
-            if port ~= me.id then
-                print("ALLLOOOOOO")
-                local s = luarpc.createProxy(IP, port, arq_interface)
-                local resp = s.receiveMessage({term = me.term, from = me.id, to = port, type = msgs.HEARTBEAT, value = "blabla"})
-                realPrint(resp)
-                print(resp)
-            end
+    local function elected()
+      -- me.timeout[states.CANDIDATE] = 0 -- FIXME: Do i need to reset the timer????
+      me.state = states.LEADER
+      me.votes = 0
+      me.currTime = 0
+      print("Got Elected")
+      for port, _ in pairs(me.peers) do
+        local s = luarpc.createProxy(IP, port, arq_interface)
+      end
+      heartbeat()
+    end
+
+    local function processVote(msg)
+      if msg.value == msgs.OK then
+        me.votes = me.votes + 1
+        if me.votes >= me.majority then
+          elected()
         end
+      end
+    end
+
+    local function callElection()
+      me.term = me.term + 1
+      me.state = states.CANDIDATE
+      me.votes = 1 -- my vote
+      local votes = {}
+      for peer, _ in pairs(me.peers) do -- FIXME: extract method "broadcast(msg)"
+        if(peer ~= me.id) then
+          local s = luarpc.createProxy(IP, peer, arq_interface)
+          votes[peer] = s.receiveMessage({term = me.term, from = me.id, to = peer, type = msgs.VOTEREQUEST, value = "blabla"})
+        end
+      end
+      for peer, vote in pairs(votes) do --FIXME: Temporary, return when using a async election!!!!!
+        if me.votes >= me.majority then
+          return
+        end
+        processVote({["value"] = vote})
+      end
     end
 
     local function wait()
-        local timeToWait = getWaitTime(me.timeout) -- caso follower
+        local timeToWait = getWaitTime(me.timeout[me.state])
         if me.failureTime > 0 then
             timeToWait = me.failureTime
             me.failureTime = 0
-        elseif me.state == states.LEADER then
-            timeToWait = getRandomTimeout()
-            print("Leader will wait ")
-            print(timeToWait)
         end
         luarpc.wait(timeToWait, true)
     end
 
+    local function castVote(peer, response)
+      local s = luarpc.createProxy(IP, peer, arq_interface)
+      s.receiveMessage({term = me.term, from = me.id, to = peer, type = msgs.VOTE, value = response})
+    end
+
+    local function checkVoteRequest(msg)
+      if msg.term < me.term then
+        return false
+      end
+      if me.votedFor ~= nil and me.votedFor ~= msg.from then
+        return false
+      end
+      return true
+    end
+
+    -- CORE FUNCTION
     -- msg { term, from, to, type, value}
-    me.receiveMessage = function(msg) -- FIXME bad if else logic!!
+    me.receiveMessage = function(msg)
         print("Mensagem recebida")
         printt(msg)
-
+        local returnMsg = msgs.OK
         if msg == nil then -- Pode ser nil???????
             print("ERRO MENSAGEM RECEBIDA NIL")
             return
         end
-        if msg.term < me.term then
-            return msgs.NO -- FIXME what to return???? 
+        if msg.type == msgs.VOTEREQUEST then -- FIXME: Should be async! create a voting state for followers??? How to keep the peer info?
+          if checkVoteRequest(msg) then
+            returnMsg = msgs.OK
+          else
+            returnMsg = msgs.NO
+          end
+        elseif msg.type == msgs.VOTE and me.state == states.CANDIDATE then -- FIXME: for now is not been used! Will be used when the voting is async
+          processVote(msg)
+        else
+          print("receiveMessage, type not implemented. Received: " .. msg.type)
         end
-        if msg.term > me.term then -- should be new election? if i failed what to do to catch up?
+
+        if msg.term > me.term then -- FIXME: Should it be updated here??
+          me.term = msg.term
           if me.state == states.LEADER then
             me.state = states.FOLLOWER -- How to know who is the new leader? Just wait for a hearbeat??
             me.currTime = 0
-            return msgs.OK -- FIXME, what to do here? should i check if its a new election?
           end
         end
-        if msg.type == msgs.HEARTBEAT then
-          if me.leader == nil then me.leader = msg.from end
-          if msg.from == me.leader then
-              print("heartbeat from:" .. msg.from .. " received")
-              me.currTime = 0
-          end
-        end
-        return "OK"
+
+        return returnMsg
     end
 
+    -- CORE FUNCTION
     me.initializeNode = function()
-        me.state = states.LEADER -- FIXME Remove!!!! just for debug purposes 
+        me.state = states.FOLLOWER
+        me.leader = nil
         me.shutdown = false
         me.majority = (me.numberOfPeers // 2 + 1)
+        me.timeout[states.FOLLOWER] = getRandomTimeout() -- timeout to call election
+        me.timeout[states.CANDIDATE] = getRandomTimeout() -- timeout to abort current election and retry
+        me.timeout[states.LEADER] = getRandomTimeout() -- timeout for heartbeat
         print("Should Initialize the node " .. me.id)
         printMe()
         while me.shutdown == false do
@@ -147,23 +203,24 @@ local function buildRaftObj()
             wait()
             me.currTime = me.currTime + (luarpc.gettime() - timeBefore)
             -- controle de timeouts
-            if me.state == states.FOLLOWER then -- FIXME extract a method
-                if me.currTime > me.timeout then
-                    me.currTime = 0
-                    me.state = states.CANDIDATE
-                    callElection()
-                    print("TIMEOUT --- BEGIN ELECTION")
-                end
-            elseif me.state == states.LEADER then
+            if me.currTime > me.timeout[me.state] then
+              if me.state == states.FOLLOWER then -- FIXME extract a method
+                me.currTime = 0
+                me.state = states.CANDIDATE
+                print("TIMEOUT --- BEGIN ELECTION")
+                callElection()
+              elseif me.state == states.LEADER then
                 print("LEDER WILL HEARTBEAT")
                 heartbeat()
-            else -- CANDIDATE
-
-            end
-
+              else -- CANDIDATE
+                me.currTime = 0
+                callElection()
+              end
+          end
         end
     end
 
+    -- CORE FUNCTION
     me.stopNode = function(time)
         if time == 0 then
             print("Should shutdown")
@@ -173,18 +230,21 @@ local function buildRaftObj()
         end
 
     end
+
+    -- CORE FUNCTION
     me.appendEntry = function(msg)
-        -- me.currTime = 0
+        me.currTime = 0 -- FIXME: How to check if the appendEntry is from the correct leader? 
         if msg == nil then
-            msg = ""
+            msg = "nil"
         end
         print("Append entry received msg: " .. msg)
         return "OK"
     end
 
+    -- CORE FUNCTION
     me.snapshot = function()
         printMe()
-        return "2"
+        return
     end
 
     return me
