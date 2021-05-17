@@ -3,20 +3,26 @@ Trabalho de Raft - Pedro Magalhães
 # Arquivos
 
 * config.lua
-- Contem uma tabela com as portas que podemos usar para os servidores. Fiz isso para facilitar a comunicação e saber quais portas estãos sendo usadas
-- Ia criar aqui os proxies mas como não usei processos separados de fato, passei o numero de servidores na criação no serve.lua e fiz a criação no proprio raft.lua 
+
+    Contem uma tabela com as portas que podemos usar para os servidores. Fiz isso para facilitar a comunicação e saber quais portas estãos sendo usadas
+    
+    Ia criar aqui os proxies mas como não usei processos separados de fato, passei o numero de servidores na criação no serve.lua e fiz a criação no proprio raft.lua 
 
 * raft.lua 
-- Implementação das funções RPC e do "obj" que guarda o estado de um membro do algoritmo
+
+  Implementação das funções RPC e do "obj" que guarda o estado de um membro do algoritmo
 
 * server.lua 
-- Instancia os objetos e cria o servelet RPC. O server recebe 3 parametros para facilitar a criação de servelets em processos diferentes.
-Nos meus testes eu criava todos os servelets no mesmo processo para facilitar o debug. 
+
+  Instancia os objetos e cria o servelet RPC. O server recebe 3 parametros para facilitar a criação de servelets em processos diferentes.
+  
+  Nos meus testes eu criava todos os servelets no mesmo processo para facilitar o debug. 
 
 * client.lua
-- faz a chamada ao node Initialize. Recebe 2 parametros o primeiro é a porta do server e segundo indica a ação que deve ser feita
-  - Se não passarmos o segundo parametro a função Initialize é chamada, se passarmos 0 a função stopNode é chamada (finaliza um servidor)
-  se passarmos -1 a função snapShot é chamada e printa no console do servidor algumas informações do servidor. Qualquer outro faz o no dormir por 10s
+
+    faz a chamada ao node Initialize. Recebe 2 parametros o primeiro é a porta do server e segundo indica a ação que deve ser feita
+       Se não passarmos o segundo parametro a função Initialize é chamada, se passarmos 0 a função stopNode é chamada (finaliza um servidor)
+        se passarmos -1 a função snapShot é chamada e printa no console do servidor algumas informações do servidor. Qualquer outro faz o no dormir por 10s
 
 
 # Relatório
