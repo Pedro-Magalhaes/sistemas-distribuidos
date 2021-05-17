@@ -91,7 +91,7 @@ function luarpc.createProxy(host, port, interface_path, verbose)
       -- espera pela resposta do request
       local returns = {}
       repeat
-        ack,err = proxy_stub.conn:receive() -- SERVER IS EXITING HERE
+        local ack,err = proxy_stub.conn:receive() -- SERVER IS EXITING HERE
         -- print("[receive loop]: ack,err = ",ack,err) -- [DEBUG]
         if err and err ~="timeout" then
           print("[ERROR] Unexpected... cause:", err)
@@ -188,19 +188,19 @@ function luarpc.waitIncoming(verbose)
         end -- end if
       end -- end for
     elseif err == "timeout" then
-      coList = coroutines_by_wakeup[wakeup_times[1]]
+      local coList = coroutines_by_wakeup[wakeup_times[1]]
       table.remove(wakeup_times, 1)
       if coList ~= nil then 
         while #coList > 0 do
-          co = coList[1]
+          local co = coList[1]
           table.remove(coList, 1)
           if co ~= nil and coroutine.status(co) ~= "dead" then
             if (verbose) then
-              print(">>> '[TIMEOUT] CO RESUME 1'- START",coroutine.status(co),co,sckt)
+              print(">>> '[TIMEOUT] CO RESUME 1'- START",coroutine.status(co),co)
             end
             coroutine.resume(co, "timeout")
             if (verbose) then
-              print(">>> '[TIMEOUT] CO RESUME 2'- STOP",coroutine.status(co),co,sckt)
+              print(">>> '[TIMEOUT] CO RESUME 2'- STOP",coroutine.status(co),co)
             end
           end
         end
@@ -216,7 +216,7 @@ function luarpc.wait(timeToWait, verbose)
   if (verbose == nil) then
     verbose = false
   end
-  wakeup = os.time() + timeToWait
+  local wakeup = os.time() + timeToWait
   table.insert(wakeup_times, wakeup)
   
   if coroutines_by_wakeup[wakeup] == nil then

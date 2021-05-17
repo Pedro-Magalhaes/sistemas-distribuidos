@@ -1,0 +1,143 @@
+************************** LOG 5 nós 1 eleito
+LuaSocket version: LuaSocket 3.0-rc1
+Server 1 is running on 36666
+Server 2 is running on 35555
+Server 3 is running on 33333
+Server 4 is running on 32222
+Server 5 is running on 31111
+1621207924.6575 --- id[31111]: Initializing node
+1621207924.6575 --- id[31111]: 
+ Timeout: 12 State: follower My term: 0
+ Peers:
+	36666
+	35555
+	33333
+	32222
+	31111
+ Leader: nil
+1621207924.6575 --- id[31111]: Will wait 4
+1621207925.2456 --- id[32222]: Initializing node
+1621207925.2456 --- id[32222]: 
+ Timeout: 12 State: follower My term: 0
+ Peers:
+	36666
+	35555
+	33333
+	32222
+	31111
+ Leader: nil
+1621207925.2456 --- id[32222]: Will wait 4
+1621207925.9095 --- id[33333]: Initializing node
+1621207925.9095 --- id[33333]: 
+ Timeout: 10 State: follower My term: 0
+ Peers:
+	36666
+	35555
+	33333
+	32222
+	31111
+ Leader: nil
+1621207925.9095 --- id[33333]: Will wait 3
+1621207926.6756 --- id[35555]: Initializing node
+1621207926.6756 --- id[35555]: 
+ Timeout: 11 State: follower My term: 0
+ Peers:
+	36666
+	35555
+	33333
+	32222
+	31111
+ Leader: nil
+1621207926.6757 --- id[35555]: Will wait 3
+1621207927.1357 --- id[36666]: Initializing node
+1621207927.1357 --- id[36666]: 
+ Timeout: 10 State: follower My term: 0
+ Peers:
+	36666
+	35555
+	33333
+	32222
+	31111
+ Leader: nil
+1621207927.1357 --- id[36666]: Will wait 3
+1621207928.1364 --- id[31111]: Will wait 4
+1621207928.1364 --- id[33333]: Will wait 3
+1621207929.1374 --- id[32222]: Will wait 4
+1621207929.1375 --- id[35555]: Will wait 3
+1621207930.1388 --- id[36666]: Will wait 3
+1621207931.1403 --- id[33333]: Will wait 3
+1621207932.1417 --- id[31111]: Will wait 4
+1621207932.1418 --- id[35555]: Will wait 3
+1621207933.1432 --- id[32222]: Will wait 4
+1621207933.1433 --- id[36666]: Will wait 3
+1621207934.1443 --- id[33333]: Will wait 3
+1621207935.1454 --- id[35555]: Will wait 3
+1621207936.1465 --- id[31111]: Will wait 4
+1621207936.1466 --- id[36666]: Will wait 3
+1621207937.148 --- id[32222]: Will wait 4
+1621207937.148 --- id[33333]: TIMEOUT --- BEGIN ELECTION
+1621207937.1482 --- id[36666]: Mensagem recebida>> voterequest from: 33333 msgTerm: 1
+1621207937.1482 --- id[36666]: Will vote for 33333
+1621207937.1484 --- id[35555]: Mensagem recebida>> voterequest from: 33333 msgTerm: 1
+1621207937.1484 --- id[35555]: Will vote for 33333
+1621207937.1485 --- id[32222]: Mensagem recebida>> voterequest from: 33333 msgTerm: 1
+1621207937.1486 --- id[32222]: Will vote for 33333
+1621207937.1487 --- id[31111]: Mensagem recebida>> voterequest from: 33333 msgTerm: 1
+1621207937.1487 --- id[31111]: Will vote for 33333
+1621207937.1487 --- id[33333]: Will wait 3
+1621207938.1503 --- id[33333]: Mensagem recebida>> vote from: 35555 msgTerm: 1
+1621207938.1504 --- id[33333]: Got a vote
+1621207938.1504 --- id[35555]: Will wait 3
+1621207939.1518 --- id[33333]: Mensagem recebida>> vote from: 36666 msgTerm: 1
+1621207939.1519 --- id[33333]: Got a vote
+1621207939.1519 --- id[33333]: Got Elected
+1621207939.1519 --- id[36666]: Will wait 3
+1621207940.1534 --- id[33333]: LEADER WILL HEARTBEAT
+1621207940.1535 --- id[33333]: heartbeating: 36666
+
+1621207940.1536 --- id[33333]: Mensagem recebida>> vote from: 31111 msgTerm: 1
+1621207940.1536 --- id[33333]: Got a vote
+1621207940.1536 --- id[36666]: Received heartBeat
+1621207940.1536 --- id[36666]: Append entry received msg: 1
+1621207940.1537 --- id[31111]: Will wait 4
+1621207940.1537 --- id[33333]: heartbeating: 35555
+
+1621207940.1538 --- id[35555]: Received heartBeat
+1621207940.1538 --- id[35555]: Append entry received msg: 1
+1621207940.1538 --- id[33333]: heartbeating: 32222
+
+1621207940.1539 --- id[32222]: Received heartBeat
+1621207940.1539 --- id[32222]: Append entry received msg: 1
+1621207940.1539 --- id[33333]: heartbeating: 31111
+
+1621207940.154 --- id[31111]: Received heartBeat
+1621207940.154 --- id[31111]: Append entry received msg: 1
+1621207940.154 --- id[33333]: Will wait 1
+1621207941.1555 --- id[35555]: Will wait 3
+1621207941.1556 --- id[33333]: Will wait 1
+1621207941.1557 --- id[33333]: Mensagem recebida>> vote from: 32222 msgTerm: 1
+1621207941.1557 --- id[33333]: Got a vote
+1621207941.1557 --- id[32222]: Will wait 4
+1621207942.1573 --- id[36666]: Will wait 3
+1621207942.1573 --- id[33333]: Will wait 1
+1621207943.1585 --- id[33333]: Will wait 1
+1621207944.1596 --- id[31111]: Will wait 4
+1621207944.1596 --- id[35555]: Will wait 3
+1621207944.1596 --- id[33333]: LEADER WILL HEARTBEAT
+1621207944.1596 --- id[33333]: heartbeating: 36666
+
+1621207944.1598 --- id[36666]: Received heartBeat
+1621207944.1598 --- id[36666]: Append entry received msg: 1
+1621207944.1598 --- id[33333]: heartbeating: 35555
+
+1621207944.1599 --- id[35555]: Received heartBeat
+1621207944.1599 --- id[35555]: Append entry received msg: 1
+1621207944.1599 --- id[33333]: heartbeating: 32222
+
+1621207944.16 --- id[32222]: Received heartBeat
+1621207944.16 --- id[32222]: Append entry received msg: 1
+1621207944.16 --- id[33333]: heartbeating: 31111
+
+1621207944.1601 --- id[31111]: Received heartBeat
+1621207944.1601 --- id[31111]: Append entry received msg: 1
+1621207944.1601 --- id[33333]: Will wait 1

@@ -1,3 +1,8 @@
+-- Para testar:
+-- verificar no artigo o que ele resolve
+
+-- Simular o que o artigo fala 
+
 local luarpc = require("luarpc")
 
 local interface = "interface.lua"

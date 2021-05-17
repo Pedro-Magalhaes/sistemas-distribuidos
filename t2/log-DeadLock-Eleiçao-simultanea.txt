@@ -1,0 +1,46 @@
+LuaSocket version: LuaSocket 3.0-rc1
+Server 1 is running on 33333
+Server 2 is running on 32222
+Server 3 is running on 31111
+1621208793.6398 --- id[31111]: Initializing node
+1621208793.6398 --- id[31111]: 
+ Timeout: 12 State: follower My term: 0
+ Peers:
+	33333
+	32222
+	31111
+ Leader: nil
+1621208793.6398 --- id[31111]: Will wait 4
+1621208794.3677 --- id[32222]: Initializing node
+1621208794.3678 --- id[32222]: 
+ Timeout: 12 State: follower My term: 0
+ Peers:
+	33333
+	32222
+	31111
+ Leader: nil
+1621208794.3678 --- id[32222]: Will wait 4
+1621208797.3297 --- id[33333]: Initializing node
+1621208797.3297 --- id[33333]: 
+ Timeout: 10 State: follower My term: 0
+ Peers:
+	33333
+	32222
+	31111
+ Leader: nil
+1621208797.3297 --- id[33333]: Will wait 3
+1621208797.3298 --- id[31111]: Will wait 4
+1621208798.3308 --- id[32222]: Will wait 4
+1621208800.3333 --- id[33333]: Will wait 3
+1621208801.3348 --- id[31111]: Will wait 4
+1621208802.3359 --- id[32222]: Will wait 4
+1621208803.3364 --- id[33333]: Will wait 3
+1621208805.3389 --- id[31111]: Will wait 4
+1621208806.3399 --- id[32222]: Will wait 4
+1621208806.34 --- id[33333]: Will wait 3
+1621208809.3435 --- id[31111]: TIMEOUT --- BEGIN ELECTION
+1621208809.3437 --- id[33333]: TIMEOUT --- BEGIN ELECTION
+1621208809.3439 --- id[32222]: Mensagem recebida>> voterequest from: 33333 msgTerm: 1
+1621208809.3439 --- id[32222]: Will vote for 33333
+1621208809.344 --- id[33333]: Mensagem recebida>> voterequest from: 31111 msgTerm: 1
+1621208809.344 --- id[33333]: Will not vote for 31111 My term: 1 his term: 1
