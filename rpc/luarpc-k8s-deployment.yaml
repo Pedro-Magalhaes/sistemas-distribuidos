@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: luarpc-deployment
+  labels:
+    app: luarpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: luarpc
+  template:
+    metadata:
+      labels:
+        app: luarpc
+    spec:
+      containers:
+      - name: luarpc
+        image: pfsmagalhaes/luarpc:0.0.1
+        ports:
+        - containerPort: 43211
