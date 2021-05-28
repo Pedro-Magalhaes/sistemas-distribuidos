@@ -38,7 +38,7 @@ o paper descreve duas abordagens:
 
 Não é implementado nenhum tipo de replicação ou cache nativamente.
 
-No entanto, o paper discreve que é possivel que a aplicação use o proprio Chord para implementar o cache e a replicação.
+No entanto, o paper descreve que é possivel que a aplicação use o proprio Chord para implementar o cache e a replicação.
 
 ## Como são tratadas entradas e saídas de nós na rede de overlay
 
