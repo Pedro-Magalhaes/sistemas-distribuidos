@@ -44,7 +44,7 @@ local clientRoutine = {}
 local clientId = 1
 while true do
     local client = coroutine.resume(serverRoutine)
-    if client != nil then
+    if client ~= nil then
         clientRoutine[clientId] = coroutine.create(clientHandler)
         local id, msg = coroutine.resume( clientRoutine[clientId], client, clientId, /*Segundos??*/ 10, 5) -- do i need msg? The client should resolve all??
         clientId = clientId + 1

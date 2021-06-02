@@ -1,33 +1,34 @@
-lista = {}
+local lista = {}
 
 lista.types = {"round-robin", "fifo", "lifo"}
 
-local function proximoElementoRound(lista) 
-    local proximo = (lista.idCorrente + 1) % lista.tam  
+local function proximoElementoRound(lista)
+    local proximo = (lista.idCorrente + 1) % lista.tam
     return proximo
 end
 
 local function fabricaPolitica(politica)
-    if politia == "fifo" then
+    if politica == "fifo" then
         os.exit(1)
-    else politia == "lifo" then
+    elseif politica == "lifo" then
         os.exit(1)
     else 
         return proximoElementoRound
     end
 end
 
-lista.nova(politia)
-    idCorrente = 0
-    tam = 0
-    proximoElemento = fabricaPolitica(politica)
+lista.nova = function (politia)
+    local politica = {}
+    politica.idCorrente = 0
+    politica.tam = 0
+    politica.proximoElemento = fabricaPolitica(politica)
 
-    pegaProximo = function (self)
-        local idProximo = proximoElemento()
+    politica.pegaProximo = function (self)
+        local idProximo = politica.proximoElemento()
         self.idCorrente = idProximo
         return lista.elemetos[idProximo]
     end
 
-    
+    return politica
 end
 return lista
