@@ -1,0 +1,83 @@
+1624581453 - 4: Initializing simulation for node **********
+1624581468 - 4: I never seen the event, will ask the random node
+1624581468 - 4: Creating query for event query-event2to: 7
+1624581485 - 4: Reseting event tables
+1624581508 - 4: Agent will not be created for event event1
+1624581509 - 4: Creating agent for event event1to: 7
+1624581515 - 4: Reseting event tables
+1624581521 - 4: Creating agent for event event1to: 1
+1624581545 - 4: Reseting event tables
+1624581548 - 4: Creating agent for event event1to: 1
+1624581553 - 4: Received: event2: "{\"seen\":{\"1\":true,\"3\":true,\"0\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"4\",\"hops\":1},\"event2\":{\"source\":\"0\",\"hops\":2}},\"ttl\":4,\"type\":\"agent\",\"from\":\"1\",\"name\":\"event2\",\"to\":\"4\"}"
+1624581553 - 4: I have a better path to event1 Agent hops was 2 mine is 0
+1624581553 - 4: Agent has a better path to event2 adjusting my event table
+1624581553 - 4: Fowarding agent to node 5
+1624581575 - 4: Reseting event tables
+1624581592 - 4: Creating agent for event event1to: 1
+1624581600 - 4: Received: event2: "{\"seen\":{\"6\":true,\"3\":true,\"7\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"8\",\"hops\":5},\"event2\":{\"source\":\"6\",\"hops\":2}},\"ttl\":4,\"type\":\"agent\",\"from\":\"7\",\"name\":\"event2\",\"to\":\"4\"}"
+1624581600 - 4: I have a better path to event1 Agent hops was 6 mine is 0
+1624581600 - 4: Agent has a better path to event2 adjusting my event table
+1624581600 - 4: Fowarding agent to node 5
+1624581605 - 4: Reseting event tables
+1624581635 - 4: Reseting event tables
+1624581654 - 4: Shutting down
+
+
+1624585522 - 4: Initializing simulation for node **********
+1624585528 - 4: Received: event1: "{\"events\":{\"event1\":{\"source\":\"0\",\"hops\":1}},\"hops\":1,\"to\":\"4\",\"from\":\"1\",\"type\":\"agent\",\"ttl\":5,\"name\":\"event1\",\"seen\":{\"1\":true,\"0\":true}}"
+1624585528 - 4: Agent has a better path to event1 adjusting my event table
+1624585528 - 4: Fowarding agent to node 5
+1624585537 - 4: Shutting down
+
+
+1624585547 - 4: Initializing simulation for node **********
+1624585554 - 4: Agent will not be created for event event1
+1624585554 - 4: I am the event source, no need for a query
+1624585558 - 4: Received: event1: "{\"seen\":{\"8\":true,\"1\":true,\"5\":true,\"2\":true,\"7\":true},\"hops\":4,\"to\":\"4\",\"ttl\":2,\"type\":\"agent\",\"from\":\"1\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"2\",\"hops\":4}}}"
+1624585558 - 4: I have a better path to event1 Agent hops was 5 mine is 0
+1624585558 - 4: Fowarding agent to node 3
+1624585578 - 4: Reseting event tables
+1624585608 - 4: Reseting event tables
+1624585634 - 4: Shutting down
+
+
+1624585700 - 4: Initializing simulation for node **********
+1624585709 - 4: Received: event1: "{\"seen\":{\"3\":true,\"1\":true,\"0\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"0\",\"hops\":1}},\"ttl\":4,\"type\":\"agent\",\"from\":\"3\",\"name\":\"event1\",\"to\":\"4\"}"
+1624585709 - 4: Agent has a better path to event1 adjusting my event table
+1624585709 - 4: Fowarding agent to node 5
+1624585731 - 4: Received: event1: "{\"seen\":{\"8\":true,\"1\":true,\"5\":true,\"2\":true,\"7\":true},\"hops\":4,\"to\":\"4\",\"ttl\":2,\"type\":\"agent\",\"from\":\"7\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"8\",\"hops\":4}}}"
+1624585731 - 4: I have a better path to event1 Agent hops was 5 mine is 2
+1624585731 - 4: Fowarding agent to node 3
+1624585731 - 4: Reseting event tables
+1624585741 - 4: Received: event1: "{\"seen\":{\"3\":true,\"1\":true,\"0\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"0\",\"hops\":2}},\"ttl\":4,\"type\":\"agent\",\"from\":\"3\",\"name\":\"event1\",\"to\":\"4\"}"
+1624585741 - 4: Agent has a better path to event1 adjusting my event table
+1624585741 - 4: Fowarding agent to node 5
+1624585758 - 4: Received: event1: "{\"seen\":{\"8\":true,\"1\":true,\"5\":true,\"2\":true,\"7\":true},\"hops\":4,\"to\":\"4\",\"ttl\":2,\"type\":\"agent\",\"from\":\"1\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"1\",\"hops\":0}}}"
+1624585758 - 4: Agent has a better path to event1 adjusting my event table
+1624585758 - 4: Fowarding agent to node 3
+1624585761 - 4: Reseting event tables
+1624585764 - 4: Agent will not be created for event event1
+1624585764 - 4: Agent will not be created for event event1
+1624585765 - 4: Creating agent for event event1to: 7
+1624585776 - 4: Received: event1: "{\"seen\":{\"8\":true,\"1\":true,\"5\":true,\"2\":true,\"7\":true},\"hops\":4,\"to\":\"4\",\"ttl\":2,\"type\":\"agent\",\"from\":\"7\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"4\",\"hops\":1}}}"
+1624585776 - 4: I have a better path to event1 Agent hops was 2 mine is 0
+1624585776 - 4: Fowarding agent to node 3
+1624585781 - 4: Received: event2: "{\"seen\":{\"6\":true,\"3\":true,\"7\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"4\",\"hops\":1},\"event2\":{\"source\":\"6\",\"hops\":2}},\"ttl\":4,\"type\":\"agent\",\"from\":\"3\",\"name\":\"event2\",\"to\":\"4\"}"
+1624585781 - 4: I have a better path to event1 Agent hops was 2 mine is 0
+1624585781 - 4: Agent has a better path to event2 adjusting my event table
+1624585781 - 4: Fowarding agent to node 5
+1624585787 - 4: Received: event1: "{\"seen\":{\"5\":true},\"hops\":0,\"to\":\"4\",\"ttl\":6,\"type\":\"agent\",\"from\":\"5\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"5\",\"hops\":0},\"event2\":{\"source\":\"4\",\"hops\":4}}}"
+1624585787 - 4: I have a better path to event1 Agent hops was 1 mine is 0
+1624585787 - 4: I have a better path to event2 Agent hops was 5 mine is 3
+1624585787 - 4: Fowarding agent to node 3
+1624585791 - 4: Reseting event tables
+1624585800 - 4: Received: event1: "{\"seen\":{\"8\":true,\"7\":true,\"5\":true},\"hops\":2,\"events\":{\"event1\":{\"source\":\"8\",\"hops\":2}},\"ttl\":4,\"type\":\"agent\",\"from\":\"7\",\"name\":\"event1\",\"to\":\"4\"}"
+1624585800 - 4: Agent has a better path to event1 adjusting my event table
+1624585800 - 4: Fowarding agent to node 3
+1624585804 - 4: Received: event2: "{\"to\":\"4\",\"hops\":3,\"events\":{\"event1\":{\"source\":\"2\",\"hops\":2},\"event2\":{\"source\":\"2\",\"hops\":3}},\"from\":\"1\",\"type\":\"agent\",\"ttl\":3,\"name\":\"event2\",\"seen\":{\"2\":true,\"8\":true,\"1\":true,\"5\":true}}"
+1624585804 - 4: Agent has a better path to event1 adjusting my event table
+1624585804 - 4: Agent has a better path to event2 adjusting my event table
+1624585804 - 4: Fowarding agent to node 3
+1624585819 - 4: Shutting down
+
+

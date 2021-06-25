@@ -1,0 +1,56 @@
+1624581451 - 0: Initializing simulation for node **********
+1624581468 - 0: Received: query-event2: "{\"path\":[\"4\",\"7\",\"6\",\"3\"],\"hops\":3,\"to\":\"0\",\"seen\":{\"4\":true,\"6\":true,\"3\":true,\"7\":true},\"type\":\"query\",\"from\":\"3\",\"name\":\"event2\",\"ttl\":3}"
+1624581468 - 0: Query
+1624581468 - 0: Fowarding: {"path":["4","7","6","3","0"],"hops":4,"to":"1","ttl":2,"type":"query","seen":{"4":true,"3":true,"7":true,"6":true,"0":true},"name":"event2","from":"0"}
+1624581481 - 0: Reseting event tables
+1624581509 - 0: Received: event1: "{\"to\":\"0\",\"hops\":3,\"events\":{\"event1\":{\"source\":\"6\",\"hops\":3}},\"from\":\"3\",\"type\":\"agent\",\"ttl\":3,\"name\":\"event1\",\"seen\":{\"4\":true,\"6\":true,\"3\":true,\"7\":true}}"
+1624581509 - 0: Agent has a better path to event1 adjusting my event table
+1624581509 - 0: Fowarding agent to node 1
+1624581511 - 0: Reseting event tables
+1624581541 - 0: Reseting event tables
+1624581553 - 0: Received: event2: "{\"seen\":{\"3\":true},\"hops\":0,\"to\":\"0\",\"ttl\":6,\"type\":\"agent\",\"from\":\"3\",\"name\":\"event2\",\"events\":{\"event2\":{\"source\":\"3\",\"hops\":0}}}"
+1624581553 - 0: Agent has a better path to event2 adjusting my event table
+1624581553 - 0: Fowarding agent to node 1
+1624581571 - 0: Reseting event tables
+1624581601 - 0: Reseting event tables
+1624581609 - 0: I never seen the event, will ask the random node
+1624581609 - 0: Creating query for event query-event1to: 1
+1624581610 - 0: Received: query-event1: "{\"path\":[],\"hops\":11,\"to\":\"0\",\"from\":\"1\",\"type\":\"query\",\"ttl\":1,\"name\":\"return\",\"seen\":{\"8\":true,\"1\":true,\"5\":true,\"2\":true,\"6\":true,\"7\":true,\"0\":true}}"
+1624581610 - 0: Query
+1624581610 - 0: Query returned to query origin! Total hops: 12
+1624581631 - 0: Reseting event tables
+1624581654 - 0: Shutting down
+
+
+1624585519 - 0: Initializing simulation for node **********
+1624585526 - 0: Agent will not be created for event event1
+1624585527 - 0: Agent will not be created for event event1
+1624585528 - 0: Creating agent for event event1to: 1
+1624585537 - 0: Shutting down
+
+
+1624585543 - 0: Initializing simulation for node **********
+1624585574 - 0: Reseting event tables
+1624585604 - 0: Reseting event tables
+1624585634 - 0: Reseting event tables
+1624585634 - 0: Shutting down
+
+
+1624585697 - 0: Initializing simulation for node **********
+1624585703 - 0: Agent will not be created for event event1
+1624585709 - 0: Received: event1: "{\"seen\":{\"1\":true},\"hops\":0,\"to\":\"0\",\"ttl\":6,\"type\":\"agent\",\"from\":\"1\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"1\",\"hops\":0}}}"
+1624585709 - 0: I have a better path to event1 Agent hops was 1 mine is 0
+1624585709 - 0: Fowarding agent to node 3
+1624585727 - 0: Reseting event tables
+1624585741 - 0: Received: event1: "{\"seen\":{\"1\":true},\"hops\":0,\"to\":\"0\",\"ttl\":6,\"type\":\"agent\",\"from\":\"1\",\"name\":\"event1\",\"events\":{\"event1\":{\"source\":\"1\",\"hops\":0}}}"
+1624585741 - 0: Agent has a better path to event1 adjusting my event table
+1624585741 - 0: Fowarding agent to node 3
+1624585757 - 0: Reseting event tables
+1624585765 - 0: Received: event1: "{\"to\":\"0\",\"hops\":3,\"events\":{\"event1\":{\"source\":\"6\",\"hops\":3}},\"from\":\"3\",\"type\":\"agent\",\"ttl\":3,\"name\":\"event1\",\"seen\":{\"4\":true,\"6\":true,\"3\":true,\"7\":true}}"
+1624585765 - 0: Agent has a better path to event1 adjusting my event table
+1624585765 - 0: Fowarding agent to node 1
+1624585787 - 0: Reseting event tables
+1624585817 - 0: Reseting event tables
+1624585819 - 0: Shutting down
+
+
