@@ -1,0 +1,19 @@
+domain: pfsmagalhaes
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: lua-rpc-operator
+repo: github.com/Pedro-Magalhaes/sistemas-distribuidos/tree/main/rpc/operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: pfsmagalhaes
+  group: luarpc
+  kind: LuaRpc
+  path: github.com/Pedro-Magalhaes/sistemas-distribuidos/tree/main/rpc/operator/api/v1
+  version: v1
+version: "3"

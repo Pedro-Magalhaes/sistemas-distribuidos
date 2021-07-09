@@ -1,0 +1,24 @@
+# permissions for end users to edit luarpcs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: luarpc-editor-role
+rules:
+- apiGroups:
+  - luarpc.pfsmagalhaes
+  resources:
+  - luarpcs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - luarpc.pfsmagalhaes
+  resources:
+  - luarpcs/status
+  verbs:
+  - get

@@ -1,0 +1,20 @@
+# permissions for end users to view luarpcs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: luarpc-viewer-role
+rules:
+- apiGroups:
+  - luarpc.pfsmagalhaes
+  resources:
+  - luarpcs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - luarpc.pfsmagalhaes
+  resources:
+  - luarpcs/status
+  verbs:
+  - get

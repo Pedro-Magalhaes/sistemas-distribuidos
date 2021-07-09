@@ -1,0 +1,7 @@
+apiVersion: luarpc.pfsmagalhaes/v1
+kind: LuaRpc
+metadata:
+  name: luarpc-sample
+spec:
+  # Add fields here
+  foo: bar

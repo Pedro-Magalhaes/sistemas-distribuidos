@@ -11,4 +11,10 @@ cfg.mqtt.events = {
   {topic="event2"},
 }
 
+cfg.mqtt.server = {
+  ip="pi4.local",
+  port=1883,
+}
+
+
 return cfg

@@ -1,0 +1,4 @@
+## Append samples you want in your CSV to this file as resources ##
+resources:
+- luarpc_v1_luarpc.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples
